@@ -1,0 +1,35 @@
+syntax = "proto3";
+//import "google/protobuf/wrappers.proto";
+
+option java_package ="org.example.grpc_mvn";
+
+service User{
+  rpc login(LoginRequest) returns(APIResponse);
+  rpc logout(Empty) returns(APIResponse);
+  rpc getTime(TimeStreamRequest) returns(stream TimeUpdate);
+}
+
+message LoginRequest{
+  string username = 1;
+  string password = 2;
+}
+
+message APIResponse{
+  string responseMessage = 1;
+  int32 responseCode = 2;
+}
+message Empty{
+
+}
+
+message Time{
+  string value =1;
+}
+
+message TimeStreamRequest{
+  int32 length = 1;
+}
+
+message TimeUpdate{
+   Time time = 1;
+}
